@@ -68,3 +68,6 @@ gem 'devise'
 group :development do
   gem 'letter_opener'
 end
+
+ruby '3.2.0'
+
