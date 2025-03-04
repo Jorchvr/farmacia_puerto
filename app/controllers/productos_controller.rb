@@ -32,8 +32,12 @@ class ProductosController < ApplicationController
 
   def destroy
     @producto.destroy!
-    redirect_to productos_path, notice: "Producto eliminado definitivamente."
+    respond_to do |format|
+      format.html { redirect_to productos_path, notice: "Producto eliminado definitivamente." }
+      format.json { head :no_content }
+    end
   end
+  
 
   private
 

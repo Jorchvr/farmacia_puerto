@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_importmap_tags %>
-
     <style>
       /* Global */
       body {
@@ -62,14 +61,13 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       }
       /* Encabezado de sección */
-      header.page-header {
+      .page-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #e0e0e0;
+        padding: 20px;
       }
-      header.page-header h1 {
+      .page-header h1 {
         margin: 0;
         font-size: 24px;
       }
@@ -105,17 +103,9 @@
       <!-- Área de contenido -->
       <div class="content">
         <div class="content-box">
-          <header class="page-header">
-            <h1>
-              <% if params[:modo] == "editar" %>
-                Editar Productos
-              <% elsif params[:modo] == "eliminar" %>
-                Producto eliminado
-              <% else %>
-                Listado de Productos
-              <% end %>
-            </h1>
-            <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "btn" %>
+          <header class="page-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <h1>Dashboard - Back Office</h1>
+            <%= link_to "Cerrar Sesión", destroy_user_session_path, class: "btn", style: "background: #333; color: #fff; padding: 10px 20px;" %>
           </header>
           
           <%= yield %>
@@ -124,3 +114,5 @@
     </div>
   </body>
 </html>
+
+

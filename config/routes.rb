@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Configura Devise para usar GET en sign out
+  devise_for :users, sign_out_via: :get
 
   # Rutas para el Front Office
   root 'tienda#index'
@@ -15,6 +16,10 @@ Rails.application.routes.draw do
   get 'ofertas', to: 'ofertas#index', as: 'offers'
   get 'contactos', to: 'contactos#index', as: 'contactos'
 
+  # Rutas para el acceso al Back Office mediante código de admin
+  get 'admin_access', to: 'admin_access#new', as: 'admin_access'
+  post 'admin_access', to: 'admin_access#create'
+
   # Rutas para el Back Office (Dashboard)
   get 'dashboard', to: 'dashboard#index'
   get 'dashboard/ventas', to: 'dashboard#ventas', as: 'dashboard_ventas'
@@ -23,6 +28,9 @@ Rails.application.routes.draw do
   get 'dashboard/registrar_venta', to: 'dashboard#nueva_venta', as: 'dashboard_registrar_venta'
   post 'dashboard/registrar_venta', to: 'dashboard#crear_venta'
 end
+
+
+
 
 
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Farmacias del Puerto</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_importmap_tags %>
+    <style>
+      /* Estilos globales para el login/registro */
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        color: #333;
+      }
+      header {
+        background: #8B0000; /* Rojo mate */
+        padding: 20px;
+        text-align: center;
+      }
+      header h1 {
+        color: #fff;
+        margin: 0;
+        font-size: 28px;
+      }
+      .content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Farmacias del Puerto</h1>
+    </header>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>
