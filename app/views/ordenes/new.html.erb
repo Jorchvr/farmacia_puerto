@@ -1,0 +1,30 @@
+<h1>Confirmar Orden</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total = 0 %>
+    <% @cart_items.each do |item| %>
+      <% producto = item[:producto] %>
+      <% quantity = item[:quantity] %>
+      <tr>
+        <td><%= producto.nombre %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(producto.precio) %></td>
+        <% subtotal = producto.precio * quantity %>
+        <td><%= number_to_currency(subtotal) %></td>
+      </tr>
+      <% total += subtotal %>
+    <% end %>
+  </tbody>
+</table>
+<h2>Total: <%= number_to_currency(total) %></h2>
+<%= form_with url: ordenes_path, method: :post do |f| %>
+  <%= f.submit "Confirmar Orden" %>
+<% end %>

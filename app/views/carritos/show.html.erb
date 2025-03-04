@@ -1,0 +1,67 @@
+<div class="wrapper" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f5f5f5;">
+  <div class="content-box" style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; width: 800px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+    <header class="page-header" style="text-align: center; margin-bottom: 20px;">
+      <h1>Tu Carrito</h1>
+    </header>
+    
+    <% if @cart_items.blank? %>
+      <p style="text-align: center;">Tu carrito está vacío.</p>
+    <% else %>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background: #f0f0f0;">
+            <th style="padding: 10px; border: 1px solid #e0e0e0;">Producto</th>
+            <th style="padding: 10px; border: 1px solid #e0e0e0;">Cantidad</th>
+            <th style="padding: 10px; border: 1px solid #e0e0e0;">Precio Unitario</th>
+            <th style="padding: 10px; border: 1px solid #e0e0e0;">Subtotal</th>
+            <th style="padding: 10px; border: 1px solid #e0e0e0;">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% total = 0 %>
+          <% @cart_items.each do |item| %>
+            <% producto = item[:producto] %>
+            <% quantity = item[:quantity] %>
+            <% subtotal = producto.precio * quantity %>
+            <tr style="background: #fff;">
+              <td style="padding: 10px; border: 1px solid #e0e0e0;"><%= producto.nombre %></td>
+              <td style="padding: 10px; border: 1px solid #e0e0e0;"><%= quantity %></td>
+              <td style="padding: 10px; border: 1px solid #e0e0e0;"><%= number_to_currency(producto.precio) %></td>
+              <td style="padding: 10px; border: 1px solid #e0e0e0;"><%= number_to_currency(subtotal) %></td>
+              <td style="padding: 10px; border: 1px solid #e0e0e0;">
+                <!-- Botón de eliminación: envía DELETE a /carrito con el parámetro producto_id -->
+                <%= link_to "Eliminar", carrito_path(producto_id: producto.id), method: :delete, class: "btn" %>
+              </td>
+            </tr>
+            <% total += subtotal %>
+          <% end %>
+        </tbody>
+      </table>
+      <h2 style="text-align: center; margin-top: 20px;">Total: <%= number_to_currency(total) %></h2>
+      
+      <!-- Sección de pago -->
+      <div style="text-align: center; margin-top: 30px;">
+        <h3>Elige tu método de pago:</h3>
+        <%= form_with url: new_order_path, method: :get, local: true do |f| %>
+          <div style="margin: 10px 0;">
+            <%= f.radio_button :payment_method, "efectivo", checked: true %>
+            <%= f.label :payment_method, "Efectivo" %>
+          </div>
+          <div style="margin: 10px 0;">
+            <%= f.radio_button :payment_method, "paypal" %>
+            <%= f.label :payment_method, "PayPal" %>
+          </div>
+          <div style="margin: 10px 0;">
+            <%= f.radio_button :payment_method, "tarjeta" %>
+            <%= f.label :payment_method, "Tarjeta de Débito/Crédito" %>
+          </div>
+          <%= f.submit "Proceder al Pago", class: "submit", style: "padding: 10px 20px; margin-top: 10px;" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

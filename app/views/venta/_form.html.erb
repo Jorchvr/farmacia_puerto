@@ -1,0 +1,37 @@
+<%= form_with(model: ventum) do |form| %>
+  <% if ventum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(ventum.errors.count, "error") %> prohibited this ventum from being saved:</h2>
+
+      <ul>
+        <% ventum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :producto_id, style: "display: block" %>
+    <%= form.text_field :producto_id %>
+  </div>
+
+  <div>
+    <%= form.label :cantidad, style: "display: block" %>
+    <%= form.number_field :cantidad %>
+  </div>
+
+  <div>
+    <%= form.label :total, style: "display: block" %>
+    <%= form.text_field :total %>
+  </div>
+
+  <div>
+    <%= form.label :fecha, style: "display: block" %>
+    <%= form.date_field :fecha %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

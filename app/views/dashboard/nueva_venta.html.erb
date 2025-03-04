@@ -1,0 +1,21 @@
+<div class="wrapper" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <div class="form-box" style="background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 400px; box-sizing: border-box;">
+    <header class="page-header" style="text-align: center; margin-bottom: 20px;">Registrar Venta</header>
+    
+    <%= form_with model: @venta, url: dashboard_registrar_venta_path, local: true do |f| %>
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :producto_id, "Producto" %><br>
+        <%= f.collection_select :producto_id, @productos, :id, :nombre, {prompt: "Selecciona un producto"}, {class: "input-field", style: "width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"} %>
+      </div>
+      
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :cantidad, "Cantidad" %><br>
+        <%= f.number_field :cantidad, min: 1, class: "input-field", style: "width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" %>
+      </div>
+      
+      <div class="actions" style="text-align: center;">
+        <%= f.submit "Registrar Venta", class: "submit", style: "padding: 10px 20px; border: none; border-radius: 5px; background: #ddd; cursor: pointer;" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Farmacias del Puerto</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_importmap_tags %>
+
+    <style>
+      /* Opcional: Estilos globales para front office */
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: #333;
+      }
+      header {
+        background: #333;
+        padding: 20px;
+      }
+      header h1 {
+        color: #fff;
+        margin: 0;
+        font-size: 28px;
+      }
+      .top-nav {
+        text-align: center;
+        padding: 10px;
+      }
+      .top-nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+  <header class="top-nav">
+  <%= link_to "Tienda Virtual", tienda_index_path, class: "nav-link" %>
+  <%= link_to "Ofertas", offers_path, class: "nav-link" %>
+  <%= link_to "Contáctanos", contactos_path, class: "nav-link" %>
+  <%= link_to "Carrito", carrito_path, class: "nav-link" %>
+   <%= link_to "Agendar Cita", new_cita_path, class: "nav-link" %>
+</header>
+
+    <%= yield %>
+  </body>
+</html>
+
+

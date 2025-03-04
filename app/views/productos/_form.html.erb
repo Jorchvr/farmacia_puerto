@@ -1,0 +1,59 @@
+<%= form_with(model: @producto, local: true, html: { multipart: true }) do |f| %>
+  <% if @producto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@producto.errors.count, "error") %> impidieron guardar el producto:</h2>
+      <ul>
+        <% @producto.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Nombre -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre, class: "input-field", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+
+  <!-- Descripción -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion, class: "input-field", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+
+  <!-- Precio Regular -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :precio, "Precio Regular" %><br>
+    <%= f.number_field :precio, step: 0.01, class: "input-field", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+
+  <!-- Stock -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :stock %><br>
+    <%= f.number_field :stock, class: "input-field", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+  
+  <!-- Precio en Oferta (Opcional) -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :sale_price, "Precio en Oferta" %><br>
+    <%= f.number_field :sale_price, step: 0.01, class: "input-field", placeholder: "Opcional: Precio especial", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+
+  <!-- Campo para la imagen -->
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :imagen, "Imagen del Producto" %><br>
+    <%= f.file_field :imagen, class: "input-field", style: "width: 100%;" %>
+  </div>
+
+  <!-- Botón de envío -->
+  <div class="actions" style="text-align: center;">
+    <%= f.submit (@producto.new_record? ? "Crear Producto" : "Actualizar Producto"), class: "btn", style: "padding: 10px 20px;" %>
+  </div>
+<% end %>
+
+ 
+
+
+
+

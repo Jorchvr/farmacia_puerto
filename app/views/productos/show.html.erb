@@ -1,0 +1,28 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @producto.nombre %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @producto.descripcion %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= number_to_currency(@producto.precio) %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @producto.stock %>
+</p>
+
+<p>
+  <strong>Imagen:</strong>
+  <% if @producto.imagen.attached? %>
+    <%= image_tag @producto.imagen, style: "max-width: 300px;" %>
+  <% else %>
+    No hay imagen disponible.
+  <% end %>
+</p>

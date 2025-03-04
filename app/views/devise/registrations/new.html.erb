@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div class="form-box">
+    <header>Sign up</header>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="input-box">
+        <i class="fas fa-envelope"></i>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Correo Electrónico", class: "input-field" %>
+      </div>
+      <div class="input-box">
+        <i class="fas fa-lock"></i>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Contraseña", class: "input-field" %>
+      </div>
+      <div class="input-box">
+        <i class="fas fa-lock"></i>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmar Contraseña", class: "input-field" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign up", class: "submit" %>
+      </div>
+    <% end %>
+    <div style="margin-top: 15px; text-align: center;">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
+
+                

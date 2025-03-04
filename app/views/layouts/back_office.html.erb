@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back Office - Farmacia Ecommerce</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_importmap_tags %>
+
+    <style>
+      /* Global */
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        color: #333;
+      }
+      .container {
+        display: flex;
+      }
+      /* Sidebar (Menú lateral) */
+      .sidebar {
+        width: 200px;
+        background-color: #8B0000;  /* Rojo mate oscuro */
+        padding: 20px;
+        min-height: 100vh;
+        color: #fff;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+      .sidebar li {
+        margin-bottom: 15px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: background 0.3s;
+      }
+      .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      /* Contenido */
+      .content {
+        flex: 1;
+        padding: 20px;
+        background: url('/images/bg_section.jpg') no-repeat center center;
+        background-size: cover;
+      }
+      /* Caja de contenido (box) */
+      .content-box {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      /* Encabezado de sección */
+      header.page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      header.page-header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      /* Botones */
+      .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #fff;
+        background: #333;
+        border-radius: 4px;
+        transition: background 0.3s;
+      }
+      .btn:hover {
+        background: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Menú lateral -->
+      <div class="sidebar">
+        <ul>
+          <li><a href="<%= productos_path %>">Productos</a></li>
+          <li><a href="<%= new_producto_path %>">Crear Producto</a></li>
+          <li><a href="<%= dashboard_ventas_path %>">Ventas del Mes</a></li>
+          <li><a href="<%= dashboard_stock_path %>">Stock de Productos</a></li>
+          <li><a href="<%= dashboard_mas_vendidos_path %>">Productos Más Vendidos</a></li>
+          <li><a href="<%= dashboard_registrar_venta_path %>">Registrar Venta</a></li>
+        </ul>
+      </div>
+      
+      <!-- Área de contenido -->
+      <div class="content">
+        <div class="content-box">
+          <header class="page-header">
+            <h1>
+              <% if params[:modo] == "editar" %>
+                Editar Productos
+              <% elsif params[:modo] == "eliminar" %>
+                Producto eliminado
+              <% else %>
+                Listado de Productos
+              <% end %>
+            </h1>
+            <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "btn" %>
+          </header>
+          
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

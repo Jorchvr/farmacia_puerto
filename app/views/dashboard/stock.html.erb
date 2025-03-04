@@ -1,0 +1,26 @@
+<div class="wrapper" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <div class="content-box" style="background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 800px; box-sizing: border-box;">
+    <header class="page-header" style="text-align: center; margin-bottom: 20px;">Stock de Productos</header>
+    
+    <% if @productos.any? %>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background: #f0f0f0;">
+            <th style="padding: 10px; border: 1px solid #ccc;">Nombre</th>
+            <th style="padding: 10px; border: 1px solid #ccc;">Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @productos.each do |producto| %>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ccc;"><%= producto.nombre %></td>
+              <td style="padding: 10px; border: 1px solid #ccc;"><%= producto.stock %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p style="text-align: center;">No hay productos registrados.</p>
+    <% end %>
+  </div>
+</div>

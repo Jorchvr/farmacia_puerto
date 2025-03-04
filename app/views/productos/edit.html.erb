@@ -1,0 +1,18 @@
+<div class="wrapper" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <div class="form-box" style="background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 400px; box-sizing: border-box;">
+    <header class="page-header" style="text-align: center; margin-bottom: 20px;">Editar Producto</header>
+    
+    <!-- Renderiza el formulario compartido -->
+    <%= render 'form' %>
+    
+    <hr style="margin: 20px 0;">
+    
+    <!-- Botón para eliminar el producto -->
+    <div style="text-align: center;">
+      <%= link_to 'Eliminar Producto', producto_path(@producto), method: :delete, data: { confirm: '¿Estás seguro de eliminar este producto?' }, class: "btn", style: "background: #f44336; color: #fff; padding: 10px 20px;" %>
+    </div>
+  </div>
+</div>
+
+
+

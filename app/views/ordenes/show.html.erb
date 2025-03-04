@@ -1,0 +1,4 @@
+<h1>Detalle de la Orden</h1>
+<p><strong>Orden #:</strong> <%= @orden.id %></p>
+<p><strong>Total:</strong> <%= number_to_currency(@orden.total) %></p>
+<%= link_to "Volver a la Tienda", root_path, class: "btn" %>

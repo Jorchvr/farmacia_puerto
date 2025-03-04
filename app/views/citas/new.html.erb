@@ -1,0 +1,32 @@
+<div class="wrapper" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <div class="form-box" style="background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; width: 400px; box-sizing: border-box;">
+    <header class="page-header" style="text-align: center; margin-bottom: 20px;">Agendar Cita</header>
+    
+    <%= form_for(@cita, url: citas_path) do |f| %>
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :patient_name, "Nombre del Paciente" %><br>
+        <%= f.text_field :patient_name, class: "input-field", placeholder: "Ingresa tu nombre", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+      
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :reason, "Motivo de Consulta" %><br>
+        <%= f.text_area :reason, class: "input-field", placeholder: "Describe el motivo de la consulta", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+      
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :email, "Correo para Confirmación" %><br>
+        <%= f.email_field :email, class: "input-field", placeholder: "Ingresa tu correo", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+      
+      <div class="input-box" style="margin-bottom: 15px;">
+        <%= f.label :appointment_date, "Fecha de Cita" %><br>
+        <%= f.date_field :appointment_date, class: "input-field", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+      
+      <div class="actions" style="text-align: center;">
+        <%= f.submit "Agendar Cita", class: "submit", style: "padding: 10px 20px; border: none; border-radius: 5px; background: #ddd; cursor: pointer;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
