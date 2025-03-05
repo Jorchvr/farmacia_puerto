@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # Configura Devise para usar GET en sign out
   devise_for :users, sign_out_via: :get
 
   # Rutas para el Front Office
@@ -8,7 +7,9 @@ Rails.application.routes.draw do
   resource :carrito, only: [:show, :update, :destroy] do
     patch 'update_entrega', on: :collection
   end
-  resources :orders, only: [:new, :create, :show]
+  
+  # Ruta para simular el pago en el Front Office
+  post 'checkout', to: 'carritos#checkout', as: 'checkout'
 
   # Rutas para el menú superior del Front Office
   get 'tienda', to: 'tienda#index', as: 'tienda_index'
@@ -27,7 +28,16 @@ Rails.application.routes.draw do
   get 'dashboard/mas_vendidos', to: 'dashboard#mas_vendidos', as: 'dashboard_mas_vendidos'
   get 'dashboard/registrar_venta', to: 'dashboard#nueva_venta', as: 'dashboard_registrar_venta'
   post 'dashboard/registrar_venta', to: 'dashboard#crear_venta'
+
+  # Rutas para Corte de Caja
+  resources :corte_de_caja, only: [:new, :create, :index]
 end
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,16 @@
+<h1>Corte de Caja</h1>
+<p>Ingrese el total de ventas del día.</p>
+
+<%= form_with model: @corte, local: true do |f| %>
+  <div style="margin-bottom: 15px;">
+    <%= f.label :total, "Total de Ventas" %><br>
+    <%= f.number_field :total, step: 0.01, style: "width: 100%; padding: 8px;" %>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <%= f.label :sale_date, "Fecha" %> (opcional, se usará hoy si se deja en blanco)<br>
+    <%= f.date_field :sale_date, style: "width: 100%; padding: 8px;" %>
+  </div>
+  <div>
+    <%= f.submit "Registrar Corte de Caja", class: "btn", style: "background: #333; color: #fff; padding: 10px 20px;" %>
+  </div>
+<% end %>

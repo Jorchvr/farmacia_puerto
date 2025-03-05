@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
-  layout :layout_by_resource
+  layout "back_office"
+  helper_method :current_cart
 
-  protected
-
-  def layout_by_resource
-    if devise_controller?
-      "devise"
-    else
-      "application"
-    end
+  def current_cart
+    session[:cart] ||= {}
   end
-end
 
+  # Redirige al usuario a la sección de productos después de iniciar sesión
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+  
+end

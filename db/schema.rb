@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_04_094331) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_04_190016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,7 +28,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_094331) do
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
-    t.text "metadata"
+    t.text "metadata"class CreateOrdenes < ActiveRecord::Migration[6.1]
+    def change
+      create_table :ordenes do |t|
+        t.string :payment_method
+        t.string :other_attribute
+  
+        t.timestamps
+      end
+    end
+  end
+  
+
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
@@ -51,11 +62,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_094331) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ordens", force: :cascade do |t|
+  create_table "corte_de_cajas", force: :cascade do |t|
     t.decimal "total"
+    t.date "sale_date"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_corte_de_cajas_on_user_id"
   end
+
+  create_table "ordenes", force: :cascade do |t|
+    t.string "payment_method"
+    t.decimal "total", precision: 10, scale: 2
+    t.date "sale_date"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    ...
+  end
+  
 
   create_table "productos", force: :cascade do |t|
     t.string "nombre"
@@ -91,5 +116,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_094331) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "corte_de_cajas", "users"
   add_foreign_key "venta", "productos"
 end

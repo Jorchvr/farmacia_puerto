@@ -20,30 +20,52 @@
       }
       /* Sidebar (Menú lateral) */
       .sidebar {
-        width: 200px;
+        width: 250px;
         background-color: #8B0000;  /* Rojo mate oscuro */
         padding: 20px;
         min-height: 100vh;
         color: #fff;
       }
-      .sidebar ul {
-        list-style: none;
-        padding: 0;
+      .sidebar .logo {
+        text-align: center;
+        margin-bottom: 20px;
       }
-      .sidebar li {
-        margin-bottom: 15px;
+      .sidebar .logo img {
+        max-width: 100%;
+        height: auto;
       }
-      .sidebar a {
-        display: block;
+      .menu-section {
+        margin-bottom: 20px;
+      }
+      .menu-button {
+        width: 100%;
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: #fff;
         padding: 10px;
+        text-align: left;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .menu-button:hover {
+        background: rgba(255,255,255,0.3);
+      }
+      .submenu {
+        display: none;
+        margin-top: 10px;
+      }
+      .submenu a {
+        display: block;
+        padding: 8px 10px;
         text-decoration: none;
         color: #fff;
+        font-size: 14px;
         border-radius: 4px;
-        background: rgba(255, 255, 255, 0.1);
-        transition: background 0.3s;
+        margin-bottom: 5px;
       }
-      .sidebar a:hover {
-        background: rgba(255, 255, 255, 0.2);
+      .submenu a:hover {
+        background: rgba(255,255,255,0.2);
       }
       /* Contenido */
       .content {
@@ -85,19 +107,49 @@
         background: #555;
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        // Funcionalidad para desplegar/ocultar submenús
+        document.querySelectorAll('.menu-button').forEach(function(btn) {
+          btn.addEventListener('click', function(){
+            var submenu = this.nextElementSibling;
+            submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="container">
-      <!-- Menú lateral -->
+      <!-- Sidebar -->
       <div class="sidebar">
-        <ul>
-          <li><a href="<%= productos_path %>">Productos</a></li>
-          <li><a href="<%= new_producto_path %>">Crear Producto</a></li>
-          <li><a href="<%= dashboard_ventas_path %>">Ventas del Mes</a></li>
-          <li><a href="<%= dashboard_stock_path %>">Stock de Productos</a></li>
-          <li><a href="<%= dashboard_mas_vendidos_path %>">Productos Más Vendidos</a></li>
-          <li><a href="<%= dashboard_registrar_venta_path %>">Registrar Venta</a></li>
-        </ul>
+        <div class="logo">
+          <img src="/images/logo.png" alt="Farmacias del Puerto">
+        </div>
+        <!-- Menú: Productos -->
+        <div class="menu-section">
+          <button class="menu-button">Productos</button>
+          <div class="submenu">
+            <a href="<%= productos_path %>">Listado de Productos</a>
+            <a href="<%= new_producto_path %>">Crear Producto</a>
+            <a href="<%= dashboard_stock_path %>">Stock de Productos</a>
+          </div>
+        </div>
+        <!-- Menú: Ventas -->
+        <div class="menu-section">
+          <button class="menu-button">Ventas</button>
+          <div class="submenu">
+            <a href="<%= dashboard_registrar_venta_path %>">Registrar Venta</a>
+            <a href="<%= dashboard_mas_vendidos_path %>">Productos Más Vendidos</a>
+            <a href="<%= dashboard_ventas_path %>">Ventas del Mes</a>
+          </div>
+        </div>
+        <!-- Menú: Corte de Caja -->
+        <div class="menu-section">
+          <button class="menu-button" onclick="window.location.href='<%= corte_de_caja_index_path %>'">
+            Corte de Caja
+          </button>
+        </div>
       </div>
       
       <!-- Área de contenido -->

@@ -1,4 +1,4 @@
 class Orden < ApplicationRecord
-    # Asociaciones, validaciones, etc.
+    # Asociaciones y validaciones aquí
   end
   

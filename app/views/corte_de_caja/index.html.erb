@@ -1,0 +1,31 @@
+<h1>Corte de Caja</h1>
+
+<!-- Formulario para registrar el corte de caja -->
+<%= form_with model: @corte, url: corte_de_caja_index_path, method: :post, local: true do |f| %>
+  <div class="input-box" style="margin-bottom: 15px;">
+    <!-- Se puede mostrar el usuario actual, por ejemplo, en modo readonly -->
+    <label>Usuario:</label>
+    <input type="text" value="<%= current_user.email %>" readonly style="width: 100%; padding: 8px;">
+  </div>
+  <div class="input-box" style="margin-bottom: 15px;">
+    <%= f.label :total, "Total Vendido" %><br>
+    <%= f.number_field :total, step: 0.01, style: "width: 100%; padding: 8px;" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Registrar Corte", class: "btn", style: "background: #333; color: #fff; padding: 10px 20px;" %>
+  </div>
+<% end %>
+
+<!-- Opcional: Listado de cortes registrados -->
+<% if @cortes.present? %>
+  <h2>Historial de Cortes</h2>
+  <ul>
+    <% @cortes.each do |corte| %>
+      <li>
+        <strong><%= corte.sale_date || Date.today %>:</strong>
+        <%= number_to_currency(corte.total) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
