@@ -13,6 +13,5 @@ test:
 
 production:
   <<: *default
-  # En producción se usa la URL definida en la variable de entorno DATABASE_URL.
+  # Se utiliza la variable de entorno DATABASE_URL en producción.
   url: <%= ENV['DATABASE_URL'] %>
-
