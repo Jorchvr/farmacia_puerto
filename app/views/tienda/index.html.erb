@@ -1,3 +1,11 @@
+<!-- Buscador (opcional) -->
+<div class="search-container" style="text-align: center; margin: 20px 0;">
+  <%= form_with url: tienda_index_path, method: :get, local: true do |f| %>
+    <%= f.text_field :q, placeholder: "Buscar productos...", style: "width: 300px; padding: 8px;" %>
+    <%= f.submit "Buscar", class: "btn", style: "padding: 8px 15px; margin-left: 5px;" %>
+  <% end %>
+</div>
+
 <div class="products-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; background: url('/images/bg_products.jpg') no-repeat center center; background-size: cover;">
   <% @productos.each do |producto| %>
     <div class="product-box" style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: 300px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
@@ -17,4 +25,7 @@
     </div>
   <% end %>
 </div>
+
+
+
 

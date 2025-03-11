@@ -1,8 +1,16 @@
-<div class="products-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; padding: 20px; background: url('/images/bg_offers.jpg') no-repeat center center; background-size: cover;">
-  <% @productos_en_oferta = Producto.oferta %>
-  <% if @productos_en_oferta.any? %>
+<!-- Buscador en la sección de Ofertas -->
+<div class="search-container" style="text-align: center; margin: 20px 0;">
+  <%= form_with url: offers_path, method: :get, local: true do |f| %>
+    <%= f.text_field :q, placeholder: "Buscar ofertas...", style: "width: 300px; padding: 8px;" %>
+    <%= f.submit "Buscar", class: "btn", style: "padding: 8px 15px; margin-left: 5px;" %>
+  <% end %>
+</div>
+
+<!-- Listado de productos en oferta -->
+<div class="products-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+  <% if @productos_en_oferta.present? %>
     <% @productos_en_oferta.each do |producto| %>
-      <div class="product-box" style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <div class="product-box" style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: 300px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
         <% if producto.imagen.attached? %>
           <%= image_tag producto.imagen, alt: producto.nombre, style: "max-width: 100%; height: auto; border-radius: 4px;" %>
         <% else %>
@@ -10,9 +18,11 @@
         <% end %>
         <h2 style="font-size: 20px; margin: 10px 0;"><%= producto.nombre %></h2>
         <p style="font-size: 14px; margin: 5px 0;"><%= truncate(producto.descripcion, length: 100) %></p>
-        <!-- Precio regular tachado y precio en oferta resaltado -->
-        <p style="font-size: 16px; text-decoration: line-through; color: #999;"><%= number_to_currency(producto.precio) %></p>
-        <p style="font-size: 18px; font-weight: bold; color: #8B0000;"><%= number_to_currency(producto.sale_price) %></p>
+        <p style="font-size: 16px; font-weight: bold; margin: 5px 0;">
+          <span style="text-decoration: line-through; color: #999;"><%= number_to_currency(producto.precio) %></span>
+          <br>
+          <span style="color: #8B0000;"><%= number_to_currency(producto.sale_price) %></span>
+        </p>
         <%= form_with url: carrito_path, method: :patch, local: true do |f| %>
           <%= hidden_field_tag :producto_id, producto.id %>
           <%= hidden_field_tag :quantity, 1 %>
@@ -21,6 +31,7 @@
       </div>
     <% end %>
   <% else %>
-    <p style="text-align: center; width: 100%;">No hay ofertas disponibles por el momento.</p>
+    <p style="text-align: center;">No se encontraron ofertas.</p>
   <% end %>
 </div>
+
